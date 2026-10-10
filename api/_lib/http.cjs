@@ -15,14 +15,16 @@ function send(res, status, body) {
 function readBody(req) {
   return new Promise((resolve, reject) => {
     let raw = '';
+    const timer = setTimeout(() => reject(new Error('body_timeout')), 10000);
+    const done = value => { clearTimeout(timer); resolve(value); };
     req.on('data', c => {
       raw += c;
-      if (raw.length > 1e6) { reject(new Error('payload too large')); req.destroy(); }
+      if (raw.length > 1e6) { clearTimeout(timer); reject(new Error('payload too large')); req.destroy(); }
     });
     req.on('end', () => {
-      try { resolve(raw ? JSON.parse(raw) : {}); } catch { reject(new Error('invalid json')); }
+      try { done(raw ? JSON.parse(raw) : {}); } catch { reject(new Error('invalid json')); }
     });
-    req.on('error', reject);
+    req.on('error', err => { clearTimeout(timer); reject(err); });
   });
 }
 
@@ -38,9 +40,14 @@ function withState(handler) {
   return async (req, res) => {
     applyCors(req, res);
     if (req.method === 'OPTIONS') { res.status(204).end(); return; }
+
+    const bodyPromise = (req.method === 'GET' || req.method === 'HEAD')
+      ? Promise.resolve({})
+      : readBody(req);
+
     try {
       const state = await store.load();
-      const body = await readBody(req).catch(() => ({}));
+      const body = await bodyPromise.catch(() => ({}));
       const result = handler(state, body, req);
       if (result.mutated) await store.save(state);
       send(res, result.status, result.body);

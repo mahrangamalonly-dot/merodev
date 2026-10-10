@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+?<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -9,19 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --lime:#d8d8e0;
-    --cyan:#a9a9b6;
-    --pink:#c3c3cd;
-    --violet:#9a9aa8;
-    --amber:#e2e2e9;
-    --mint:#cbcbd6;
-    --orange:#8f8f9d;
-    --ink:#131317;
-    --ink2:#0c0c10;
-    --line:rgba(255,255,255,.12);
-    --card:rgba(255,255,255,.05);
-    --txt:#ececf1;
-    --muted:#94949f;
+    --lime:#e8e9ee;
+    --cyan:#b4b5bf;
+    --pink:#d6d7dd;
+    --violet:#a9aab4;
+    --amber:#f0f1f5;
+    --mint:#dcdee4;
+    --orange:#90919b;
+    --ink:#181920;
+    --ink2:#101116;
+    --line:rgba(255,255,255,.10);
+    --card:rgba(255,255,255,.045);
+    --txt:#e9eaee;
+    --muted:#9a9ca6;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -29,10 +29,10 @@
     font-family:'Cairo',system-ui,sans-serif;
     color:var(--txt);
     background:
-      radial-gradient(900px 620px at 85% -8%, rgba(255,255,255,.09), transparent 62%),
-      radial-gradient(820px 620px at 0% 100%, rgba(190,190,210,.13), transparent 60%),
-      radial-gradient(700px 520px at 60% 55%, rgba(130,130,150,.12), transparent 65%),
-      linear-gradient(165deg,var(--ink),var(--ink2) 55%,#08080b);
+      radial-gradient(900px 620px at 85% -8%, rgba(255,255,255,.06), transparent 62%),
+      radial-gradient(820px 620px at 0% 100%, rgba(190,192,205,.10), transparent 60%),
+      radial-gradient(700px 520px at 60% 55%, rgba(140,142,158,.08), transparent 65%),
+      linear-gradient(165deg,var(--ink),var(--ink2) 55%,#0c0d11);
     min-height:100vh;overflow-x:hidden;position:relative;
   }
   /* grid + noise overlay */
@@ -54,7 +54,7 @@
   .balloon::after{content:"";position:absolute;top:100%;left:50%;width:1px;height:80px;background:linear-gradient(rgba(255,255,255,.5),transparent)}
   @keyframes floatUp{0%{transform:translateY(0) rotate(-4deg)}100%{transform:translateY(-125vh) rotate(7deg)}}
 
-  .wrap{position:relative;z-index:2;max-width:1000px;margin:0 auto;padding:0 18px 70px}
+  .wrap{position:relative;z-index:2;max-width:1000px;margin:0 auto;padding:0 18px 50px}
 
   /* ================= MARQUEE ================= */
   .marquee{
@@ -69,7 +69,7 @@
   @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(50%)}}
 
   /* ================= HERO ================= */
-  .hero{text-align:center;padding:52px 6px 0}
+  .hero{text-align:center;padding:30px 6px 0}
   .sticker{
     display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:999px;
     background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);
@@ -77,7 +77,7 @@
     transform:rotate(-2deg);
   }
   .hero h1{
-    margin:20px 0 4px;font-family:'Lalezar',sans-serif;font-weight:400;
+    margin:14px 0 2px;font-family:'Lalezar',sans-serif;font-weight:400;
     font-size:clamp(44px,10vw,104px);line-height:1.05;letter-spacing:.5px;
     background:linear-gradient(180deg,#ffffff 10%,#cfcfd9 58%,#8b8b99 100%);
     -webkit-background-clip:text;background-clip:text;color:transparent;
@@ -94,46 +94,46 @@
     content:"يحيى";position:absolute;inset:0;-webkit-text-stroke:3px rgba(255,255,255,.22);
     color:transparent;z-index:-1;transform:translate(6px,6px);
   }
-  .tags{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0 6px}
+  .tags{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:14px 0 4px}
   .tags b{
     font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:8px;
     background:var(--card);border:1px solid var(--line);color:var(--muted);
   }
-  .hero p.sub{max-width:620px;margin:16px auto 0;color:var(--muted);font-size:clamp(15px,2.5vw,18px);line-height:1.95}
+  .hero p.sub{max-width:620px;margin:12px auto 0;color:var(--muted);font-size:clamp(15px,2.5vw,18px);line-height:1.9}
 
   .age-badge{
-    margin:30px auto 0;width:190px;height:190px;border-radius:50%;display:grid;place-content:center;
+    margin:20px auto 0;width:150px;height:150px;border-radius:50%;display:grid;place-content:center;
     background:conic-gradient(from 0deg,var(--lime),var(--cyan),var(--violet),var(--pink),var(--lime));
-    box-shadow:0 0 0 9px rgba(255,255,255,.05),0 22px 60px rgba(0,0,0,.65);
+    box-shadow:0 0 0 8px rgba(255,255,255,.04),0 18px 46px rgba(0,0,0,.6);
     animation:spinSlow 14s linear infinite;
   }
   .age-badge>div{
-    width:164px;height:164px;border-radius:50%;background:#100d20;display:grid;place-content:center;
+    width:128px;height:128px;border-radius:50%;background:#17181e;display:grid;place-content:center;
     animation:spinSlow 14s linear infinite reverse;
   }
-  .age-badge b{display:block;font-family:'Lalezar',sans-serif;font-size:70px;color:var(--lime);line-height:1}
+  .age-badge b{display:block;font-family:'Lalezar',sans-serif;font-size:56px;color:var(--amber);line-height:1}
   .age-badge small{color:var(--muted);font-size:15px}
   @keyframes spinSlow{to{transform:rotate(360deg)}}
 
-  .pills{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:24px}
+  .pills{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px}
   .pills span{
     padding:8px 15px;border-radius:12px;background:var(--card);border:1px solid var(--line);
     font-size:14px;font-weight:600;color:#e9e5ff;
   }
 
   /* ================= SECTION BASE ================= */
-  section{margin-top:44px}
-  .sec-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  section{margin-top:30px}
+  .sec-head{display:flex;align-items:center;gap:11px;margin-bottom:13px}
   .sec-head span{
-    font-family:'Lalezar',sans-serif;font-size:clamp(24px,4.5vw,34px);
-    background:linear-gradient(90deg,var(--lime),var(--cyan));
+    font-family:'Lalezar',sans-serif;font-size:clamp(22px,4.2vw,31px);
+    background:linear-gradient(90deg,#ffffff,#c9c9d4);
     -webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap;
   }
-  .sec-head i{flex:1;height:2px;background:linear-gradient(90deg,var(--line),transparent);border-radius:2px}
+  .sec-head i{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent);border-radius:2px}
 
   .panel{
-    background:var(--card);border:1px solid var(--line);border-radius:24px;
-    padding:26px 20px;backdrop-filter:blur(10px);box-shadow:0 24px 60px rgba(0,0,0,.4);
+    background:var(--card);border:1px solid var(--line);border-radius:22px;
+    padding:20px 18px;backdrop-filter:blur(10px);box-shadow:0 18px 46px rgba(0,0,0,.35);
   }
 
   /* ================= COUNTDOWN ================= */
@@ -309,25 +309,6 @@
   .music-mini.playing .eq i:nth-child(3){animation-delay:.3s}
   @keyframes eq{from{height:4px}to{height:14px}}
 
-  /* ================= BALLOON GAME ================= */
-  .game{position:relative;height:330px;border-radius:20px;overflow:hidden;border:1px solid var(--line);
-        background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02))}
-  .game .hud{position:absolute;top:12px;right:14px;left:14px;display:flex;justify-content:space-between;z-index:4;font-weight:700;font-size:15px}
-  .game .hud b{color:var(--amber)}
-  .gb{position:absolute;bottom:-70px;width:52px;height:64px;cursor:pointer;display:grid;place-content:center;
-      font-size:22px;animation:gbUp linear forwards;user-select:none}
-  .gb::after{content:"";position:absolute;top:100%;left:50%;width:1px;height:60px;background:linear-gradient(rgba(255,255,255,.5),transparent)}
-  @keyframes gbUp{from{transform:translateY(0)}to{transform:translateY(-420px)}}
-  .gb.pop{animation:gbPop .3s ease-out forwards;pointer-events:none}
-  @keyframes gbPop{to{transform:scale(1.9);opacity:0}}
-  .game .win{
-    position:absolute;inset:0;display:none;place-content:center;text-align:center;gap:6px;z-index:5;
-    background:rgba(10,8,22,.82);backdrop-filter:blur(4px);padding:20px;
-  }
-  .game .win.show{display:grid}
-  .game .win b{font-family:'Lalezar',sans-serif;font-size:34px;color:var(--amber)}
-  .game .win p{color:var(--muted);font-size:15px}
-
   /* ================= WISH WHEEL ================= */
   .wheel{text-align:center}
   .wheel-screen{
@@ -407,7 +388,7 @@
 
   <!-- ================= COUNTDOWN ================= -->
   <section>
-    <div class="sec-head"><span>استنى المفاجأة ⏳</span><i></i></div>
+    <div class="sec-head"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3.2 2"/></svg><span>استنى المفاجأة</span><i></i></div>
     <div class="panel cd-wrap">
       <p class="cd-note">
         يا يحيى… فيه مفاجأة مستنياك يوم <b>1 نوفمبر</b> 🎁🇪🇬<br>
@@ -425,7 +406,7 @@
 
   <!-- ================= CAKE ================= -->
   <section>
-    <div class="sec-head"><span>اطفئ الشموع 🕯️</span><i></i></div>
+    <div class="sec-head"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3v2.5"/><path d="M8.5 21h7"/><path d="M9.5 21v-4.6a2.5 2.5 0 0 1 5 0V21"/><path d="M12 12.5V9.5"/></svg><span>اطفئ الشموع</span><i></i></div>
     <div class="panel cake-card">
       <div class="cake" id="cake">
         <div class="candles">
@@ -449,7 +430,7 @@
 
   <!-- ================= MESSAGE ================= -->
   <section>
-    <div class="sec-head"><span>كلمة من مهران 💬</span><i></i></div>
+    <div class="sec-head"><svg class="ico" viewBox="0 0 24 24"><path d="M20.5 12.5a8.5 8.5 0 0 1-12.4 7.5L4 21.5V16A8.5 8.5 0 1 1 20.5 12.5z"/></svg><span>كلمة من مهران</span><i></i></div>
     <div class="panel chat">
       <div class="who">
         <div class="ava">🧑‍💻</div>
@@ -471,7 +452,7 @@
 
   <!-- ================= STATS ================= -->
   <section>
-    <div class="sec-head"><span>عمرك بالأرقام 📊</span><i></i></div>
+    <div class="sec-head"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20V13"/><path d="M10 20V5"/><path d="M16 20v-6"/><path d="M3 20h18"/></svg><span>عمرك بالأرقام</span><i></i></div>
     <div class="grid">
       <div class="card">
         <div class="ico">⏳</div>
@@ -513,23 +494,6 @@
         تاريخ ميلادك <b>10 / 10 / 2010</b> — والنهاردة بتكمل <b id="giftAge">16</b> سنة.<br>
         وخلي بالك… فيه مفاجأة يوم <b>1 نوفمبر</b> 🎁<br>
         <span style="color:var(--lime)">صاحبك اللي بيحبك خالص 💚</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= BALLOON GAME ================= -->
-  <section>
-    <div class="sec-head"><span>فجر البالونات 🎈</span><i></i></div>
-    <div class="panel">
-      <div class="game" id="game">
-        <div class="hud">
-          <span>النقاط: <b id="score">0</b> / <b>15</b></span>
-          <span id="gameMsg">دوس على البالونات بسرعة 👆</span>
-        </div>
-        <div class="win" id="gameWin">
-          <b>🏆 فجرت كل البالونات!</b>
-          <p>كسبت أمنية… خلي بالك، السيرة بتتقسم يوم <b style="color:var(--amber)">1 نوفمبر</b> 🎁</p>
-        </div>
       </div>
     </div>
   </section>
@@ -745,41 +709,6 @@ const SONG_FILES=['song.mp3','song.m4a','song.ogg','song.wav','music.mp3'];
     }catch(e){/* ماتكملش */}
   }
 })();
-
-/* ================= BALLOON POP GAME ================= */
-const game=document.getElementById('game'),scoreEl=document.getElementById('score'),gameWin=document.getElementById('gameWin'),gameMsg=document.getElementById('gameMsg');
-const GAME_TARGET=15;let score=0;
-const GCOLORS=['#dcdce4','#b4b4c0','#8f8f9b','#c9c9d4','#ffffff','#a9a9b6','#f2f2f6'];
-const GFACE=['🎈','🎈','🎈','🎉','💚','⭐','🎁'];
-function spawnBalloon(){
-  if(score>=GAME_TARGET)return;
-  const b=document.createElement('div');
-  b.className='gb';
-  const w=game.clientWidth;
-  const x=Math.random()*(w-70)+10;
-  b.style.left=x+'px';
-  b.style.background=GCOLORS[Math.floor(Math.random()*GCOLORS.length)];
-  b.style.borderRadius='50% 50% 50% 50%/58% 58% 42% 42%';
-  b.style.animationDuration=(Math.random()*2.5+5)+'s';
-  b.textContent=GFACE[Math.floor(Math.random()*GFACE.length)];
-  b.onclick=()=>{
-    if(b.classList.contains('pop'))return;
-    b.classList.add('pop');
-    score++;scoreEl.textContent=score;
-    const r=b.getBoundingClientRect(),gr=game.getBoundingClientRect();
-    burst(28,r.left-gr.left+26,r.top-gr.top+26);
-    setTimeout(()=>b.remove(),320);
-    if(score>=GAME_TARGET){
-      gameMsg.textContent='كسبت! 🏆';
-      gameWin.classList.add('show');
-      burst(200);setTimeout(()=>burst(150),400);
-    }
-  };
-  game.appendChild(b);
-  setTimeout(()=>b.remove(),parseFloat(b.style.animationDuration)*1000+200);
-}
-let gameTimer=setInterval(spawnBalloon,800);
-gameWin.querySelector('b').onclick=null;
 
 /* ================= WISH WHEEL ================= */
 const WISHES=[
