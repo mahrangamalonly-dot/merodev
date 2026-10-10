@@ -48,8 +48,20 @@ jobs:
             pos/dist/*.blockmap
           if-no-files-found: warn
 
-      - name: Attach to release
-        if: ${{ matrix.target == 'win' }}
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all builds
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: List files
+        run: ls -la dist/
+
+      - name: Attach to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
@@ -57,8 +69,8 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            pos/dist/*.exe
-            pos/dist/*.AppImage
-            pos/dist/*.blockmap
+            dist/*.exe
+            dist/*.AppImage
+            dist/*.blockmap
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
