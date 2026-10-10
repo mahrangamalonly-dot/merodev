@@ -9,27 +9,32 @@ const sources = [
 ].filter(s => s.url && s.token);
 
 const empty = () => ({ keys: [], orders: [] });
+let cached = null;
 
-function localFile(root) {
-  return path.join(root || process.cwd(), 'data', 'license.json');
-}
+const base = source => source.url.replace(/\/+$/, '');
 
 async function kvGet(source, key) {
-  const url = `${source.url.replace(/\/+$/, '')}/${encodeURIComponent(key)}`;
-  const res = await fetch(url, { headers: { Authorization: `Bearer ${source.token}` } });
+  const res = await fetch(`${base(source)}/get/${encodeURIComponent(key)}`, {
+    headers: { Authorization: `Bearer ${source.token}` }
+  });
   if (!res.ok) throw new Error(`kv_http_${res.status}`);
   const data = await res.json();
+  if (data.error) throw new Error(String(data.error));
   return typeof data.result === 'string' ? JSON.parse(data.result) : empty();
 }
 
 async function kvSet(source, key, value) {
-  const url = `${source.url.replace(/\/+$/, '')}/${encodeURIComponent(key)}/${encodeURIComponent(value)}`;
-  const res = await fetch(url, {
+  const res = await fetch(`${base(source)}/pipeline`, {
     method: 'POST',
-    headers: { Authorization: `Bearer ${source.token}` }
+    headers: { Authorization: `Bearer ${source.token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify([['SET', key, value]])
   });
   if (!res.ok) throw new Error(`kv_http_${res.status}`);
+  const data = await res.json();
+  if (!Array.isArray(data) || data[0]?.error) throw new Error(String(data[0]?.error || 'kv_set_failed'));
 }
+
+const localFile = root => path.join(root || process.cwd(), 'data', 'license.json');
 
 function readLocal(root) {
   try {
@@ -45,8 +50,6 @@ function writeLocal(state, root) {
   fs.writeFileSync(file, JSON.stringify(state, null, 2));
 }
 
-let cached = null;
-
 async function load(root) {
   if (cached) return cached;
   for (const source of sources) {
@@ -54,23 +57,30 @@ async function load(root) {
       cached = await kvGet(source, STATE_KEY);
       return cached;
     } catch (err) {
-      console.error(`store: ${source.name} failed`, err.message);
+      console.error(`store: read ${source.name} failed ->`, err.message);
     }
   }
-  return readLocal(root);
+  const local = readLocal(root);
+  cached = local;
+  return local;
 }
 
 async function save(state, root) {
-  cached = state;
   for (const source of sources) {
     try {
       await kvSet(source, STATE_KEY, JSON.stringify(state));
+      cached = state;
       return;
     } catch (err) {
-      console.error(`store: ${source.name} save failed`, err.message);
+      console.error(`store: write ${source.name} failed ->`, err.message);
     }
   }
-  writeLocal(state, root);
+  cached = state;
+  try {
+    writeLocal(state, root);
+  } catch (err) {
+    console.error('store: local write failed ->', err.message);
+  }
 }
 
 module.exports = {
