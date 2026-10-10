@@ -42,7 +42,7 @@ function buildInitial() {
       storeName: 'متجر ميرو',
       phone: '',
       address: '',
-      currency: 'ر.س',
+      currency: 'ج.م',
       taxRate: 15,
       receiptFooter: 'شكرًا لزيارتكم — Mero Dev POS',
       lowStock: 5,

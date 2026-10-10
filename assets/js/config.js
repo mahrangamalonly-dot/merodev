@@ -1,6 +1,6 @@
 window.MERO_CONFIG = {
-  domain: 'merodev.com',
-  siteUrl: 'https://merodev.com',
+  domain: 'merodev.vercel.app',
+  siteUrl: 'https://merodev.vercel.app',
 
   checkout: '',
 
@@ -8,15 +8,12 @@ window.MERO_CONFIG = {
 
   releases: 'https://github.com/mahrangamalonly-dot/merodev/releases',
 
-  downloads: {
-    win: 'https://github.com/mahrangamalonly-dot/merodev/releases/latest/download/Mero.Dev.POS.Setup.exe',
-    linux: 'https://github.com/mahrangamalonly-dot/merodev/releases/latest/download/Mero.Dev.POS.AppImage',
-    web: '/pos/'
-  },
-
   whatsapp: '',
 
   email: 'sales@merodev.com',
+
+  instapay: '',
+  vodafoneCash: '',
 
   demoKey: ''
 };

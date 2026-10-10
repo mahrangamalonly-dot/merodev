@@ -176,14 +176,34 @@
     });
   }
 
+  const PLAN_LABELS = {
+    basic: 'الترخيص الأساسي (جهاز واحد) — 4900 ج.م',
+    pro: 'الترخيص الاحترافي (فروع متعددة) — 9900 ج.م',
+    enterprise: 'ترخيص المؤسسات (10 أجهزة فأكثر) — 7400 ج.م/جهاز'
+  };
+
   $$('[data-buy]').forEach(btn => {
     btn.addEventListener('click', e => {
-      if (!CFG.checkout) return;
       e.preventDefault();
-      const url = new URL(CFG.checkout);
-      url.searchParams.set('plan', btn.dataset.buy);
-      if (CFG.demoKey) url.searchParams.set('discount', CFG.demoKey);
-      window.open(url.toString(), '_blank', 'noopener');
+      const plan = btn.dataset.buy;
+      const label = PLAN_LABELS[plan] || plan;
+
+      if (CFG.checkout) {
+        const url = new URL(CFG.checkout);
+        url.searchParams.set('plan', plan);
+        if (CFG.demoKey) url.searchParams.set('discount', CFG.demoKey);
+        window.open(url.toString(), '_blank', 'noopener');
+        return;
+      }
+
+      const phone = String(CFG.whatsapp || '').replace(/\D/g, '');
+      if (!phone) {
+        document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+        toast('املأ النموذج وسنتواصل معك لإتمام الطلب');
+        return;
+      }
+      const text = `مرحبًا، عايز أطلب ${label}\n(من موقع Mero Dev)`;
+      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
     });
   });
 
@@ -196,6 +216,25 @@
       else window.location.href = url;
     });
   });
+
+  const fillPayments = () => {
+    const grid = document.querySelector('#payGrid');
+    if (!grid) return;
+    const items = [];
+    if (CFG.instapay) items.push({ t: 'إنستاباي', v: CFG.instapay });
+    if (CFG.vodafoneCash) items.push({ t: 'فودافون كاش', v: CFG.vodafoneCash });
+    if (CFG.whatsapp) {
+      const phone = String(CFG.whatsapp).replace(/\D/g, '');
+      items.push({ t: 'واتساب', v: `اضغط للتواصل والمتابعة`, link: `https://wa.me/${phone}` });
+    }
+    if (CFG.email) items.push({ t: 'بريد إلكتروني', v: CFG.email });
+    grid.innerHTML = items.map(i => `
+      <div class="pay-item">
+        <span class="pay-t">${esc(i.t)}</span>
+        <span class="pay-v">${i.link ? `<a href="${i.link}" target="_blank" rel="noopener">${esc(i.v)}</a>` : esc(i.v)}</span>
+      </div>`).join('');
+  };
+  fillPayments();
 
   const bar = $('#consoleBar');
   if (bar) {

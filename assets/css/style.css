@@ -334,6 +334,16 @@ h3{font-size:1.12rem}
   border:1px solid var(--line);
 }
 .req h4{margin-bottom:1.2rem;font-size:1.05rem}
+.pay-box{border-color:var(--line-strong);background:linear-gradient(180deg,rgba(168,85,247,.1),rgba(255,255,255,.015))}
+.pay-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.8rem}
+.pay-item{
+  display:flex;flex-direction:column;gap:.25rem;padding:.9rem 1rem;border-radius:12px;
+  background:rgba(7,3,15,.55);border:1px solid var(--line);
+}
+.pay-t{font-size:.74rem;color:var(--muted);letter-spacing:.06em}
+.pay-v{font-family:var(--mono);font-weight:700;font-size:1rem;color:#fff;word-break:break-all}
+.pay-v a{color:var(--neon-2);text-decoration:none}
+.pay-v a:hover{color:var(--pink);text-decoration:underline}
 .req-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
 .req-grid>div{
   display:flex;flex-direction:column;gap:.2rem;padding:.9rem 1rem;border-radius:12px;

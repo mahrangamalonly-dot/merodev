@@ -16,3 +16,5 @@ license-server/node_modules/
 license-server/data/
 .vscode/
 .idea/
+
+.vercel
