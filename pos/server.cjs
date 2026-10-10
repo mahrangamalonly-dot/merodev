@@ -52,16 +52,38 @@ function createServer() {
 
 if (require.main === module) {
   const server = createServer();
-  server.listen(PORT, '127.0.0.1', () => {
-    console.log(`Mero Dev POS -> http://127.0.0.1:${PORT}`);
+const net = require('net');
+
+function findFreePort(start, end) {
+  return new Promise((resolve, reject) => {
+    const tryPort = port => {
+      const tester = net.createServer();
+      tester.once('error', () => {
+        if (port >= end) { reject(new Error('no_free_port')); return; }
+        tryPort(port + 1);
+      });
+      tester.once('listening', () => tester.close(() => resolve(port)));
+      tester.listen(port, '127.0.0.1');
+    };
+    tryPort(start);
   });
-  server.on('error', err => {
-    if (err.code === 'EADDRINUSE') {
-      console.error(`المنفذ ${PORT} مشغول. شغّل: $env:PORT=4180; npm start`);
-      process.exit(1);
-    }
-    throw err;
+}
+
+findFreePort(PORT, PORT + 50)
+  .then(port => {
+    server.listen(port, '127.0.0.1', () => {
+      console.log(`Mero Dev POS -> http://127.0.0.1:${port}`);
+    });
+  })
+  .catch(() => {
+    server.listen(0, '127.0.0.1', () => {
+      console.log(`Mero Dev POS -> http://127.0.0.1:${server.address().port}`);
+    });
   });
+
+server.on('error', err => {
+  if (err.code !== 'EADDRINUSE') throw err;
+});
 }
 
 module.exports = { createServer, PORT };
