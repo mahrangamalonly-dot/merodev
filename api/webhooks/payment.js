@@ -1,7 +1,7 @@
 const crypto = require('crypto');
-const store = require('../_lib/store.cjs');
-const license = require('../_lib/license.cjs');
-const { send } = require('../_lib/http.cjs');
+const store = require('./_lib/store.cjs');
+const license = require('./_lib/license.cjs');
+const { send } = require('./_lib/http.cjs');
 
 module.exports = async (req, res) => {
   try {
