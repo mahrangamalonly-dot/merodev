@@ -34,7 +34,7 @@ function isAdmin(req) {
   return Boolean(value) && value === token;
 }
 
-async function withState(handler) {
+function withState(handler) {
   return async (req, res) => {
     applyCors(req, res);
     if (req.method === 'OPTIONS') { res.status(204).end(); return; }
