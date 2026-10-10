@@ -123,7 +123,7 @@ function renderShell(root, user) {
             </a>`).join('')}
         </nav>
         <div class="side-foot">
-          <a class="dash-link" href="/dashboard/" target="_blank" rel="noopener">
+          <a class="dash-link" id="dashLink" href="/dashboard/" target="_blank" rel="noopener">
             <span class="ni">${ICONS.chart}</span><span>لوحة المعلومات</span>
           </a>
           <span class="lic-chip" title="${esc(data.license?.key || '')}">
@@ -168,6 +168,9 @@ function renderShell(root, user) {
   };
   tick();
   setInterval(tick, 1000);
+
+  const dash = root.querySelector('#dashLink');
+  if (dash) dash.href = location.pathname.replace(/[^/]*$/, '') + 'dashboard/';
 
   renderRoute(root);
 }
