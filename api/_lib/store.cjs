@@ -1,9 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 
-const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || '';
-const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '';
 const STATE_KEY = 'mero:license:v1';
+
+const sources = [
+  { name: 'vercel-kv', url: process.env.KV_REST_API_URL, token: process.env.KV_REST_API_TOKEN },
+  { name: 'upstash', url: process.env.UPSTASH_REDIS_REST_URL, token: process.env.UPSTASH_REDIS_REST_TOKEN }
+].filter(s => s.url && s.token);
 
 const empty = () => ({ keys: [], orders: [] });
 
@@ -11,25 +14,21 @@ function localFile(root) {
   return path.join(root || process.cwd(), 'data', 'license.json');
 }
 
-async function kvCommand(command) {
-  const base = KV_URL.replace(/\/+$/, '');
-  const route = Array.isArray(command) ? command : [command];
-  const url = `${base}/${route.map(encodeURIComponent).join('/')}`;
+async function kvGet(source, key) {
+  const url = `${source.url.replace(/\/+$/, '')}/${encodeURIComponent(key)}`;
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${source.token}` } });
+  if (!res.ok) throw new Error(`kv_http_${res.status}`);
+  const data = await res.json();
+  return typeof data.result === 'string' ? JSON.parse(data.result) : empty();
+}
+
+async function kvSet(source, key, value) {
+  const url = `${source.url.replace(/\/+$/, '')}/${encodeURIComponent(key)}/${encodeURIComponent(value)}`;
   const res = await fetch(url, {
-    headers: { Authorization: `Bearer ${KV_TOKEN}` }
+    method: 'POST',
+    headers: { Authorization: `Bearer ${source.token}` }
   });
   if (!res.ok) throw new Error(`kv_http_${res.status}`);
-  return res.json();
-}
-
-async function readKV() {
-  const data = await kvCommand(['get', STATE_KEY]);
-  if (data && typeof data.result === 'string') return JSON.parse(data.result);
-  return empty();
-}
-
-async function writeKV(state) {
-  await kvCommand(['set', STATE_KEY, JSON.stringify(state)]);
 }
 
 function readLocal(root) {
@@ -46,15 +45,37 @@ function writeLocal(state, root) {
   fs.writeFileSync(file, JSON.stringify(state, null, 2));
 }
 
-const hasKV = () => Boolean(KV_URL && KV_TOKEN);
-module.exports = {
-  hasKV,
-  async load(root) {
-    if (hasKV()) return readKV();
-    return readLocal(root);
-  },
-  async save(state, root) {
-    if (hasKV()) return writeKV(state);
-    writeLocal(state, root);
+let cached = null;
+
+async function load(root) {
+  if (cached) return cached;
+  for (const source of sources) {
+    try {
+      cached = await kvGet(source, STATE_KEY);
+      return cached;
+    } catch (err) {
+      console.error(`store: ${source.name} failed`, err.message);
+    }
   }
+  return readLocal(root);
+}
+
+async function save(state, root) {
+  cached = state;
+  for (const source of sources) {
+    try {
+      await kvSet(source, STATE_KEY, JSON.stringify(state));
+      return;
+    } catch (err) {
+      console.error(`store: ${source.name} save failed`, err.message);
+    }
+  }
+  writeLocal(state, root);
+}
+
+module.exports = {
+  hasKV: () => sources.length > 0,
+  sourceNames: () => sources.map(s => s.name),
+  load,
+  save
 };

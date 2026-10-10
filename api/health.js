@@ -1,9 +1,10 @@
 ﻿const { send } = require('./_lib/http.cjs');
+const store = require('./_lib/store.cjs');
 
 module.exports = (req, res) => {
   send(res, 200, {
     ok: true,
     service: 'mero-license',
-    storage: process.env.KV_REST_API_URL ? 'kv' : 'local'
+    storage: store.hasKV() ? store.sourceNames().join('+') : 'local'
   });
 };
