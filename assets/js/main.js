@@ -216,6 +216,9 @@
     });
   });
 
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
   const fillPayments = () => {
     const grid = document.querySelector('#payGrid');
     if (!grid) return;
