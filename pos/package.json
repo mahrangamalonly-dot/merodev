@@ -21,6 +21,7 @@
       "index.html",
       "assets/**/*",
       "src/**/*",
+      "dashboard/**/*",
       "server.cjs",
       "electron/**/*"
     ],
@@ -33,9 +34,11 @@
     ],
     "win": {
       "target": ["nsis"],
-      "publisherName": "Mero Dev"
+      "publisherName": "Mero Dev",
+      "icon": "assets/img/icon.ico",
+      "signAndEditExecutable": false
     },
-    "linux": { "target": "AppImage" }
+    "linux": { "target": "AppImage", "icon": false }
   },
   "devDependencies": {
     "electron": "^32.0.0",
