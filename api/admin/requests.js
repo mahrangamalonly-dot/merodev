@@ -9,6 +9,11 @@ module.exports = withState((state, body, req) => {
     return { ...result, mutated: result.body.ok === true };
   }
 
+  if (req.method === 'DELETE') {
+    const result = license.removeRequest(state, body);
+    return { ...result, mutated: result.body.ok === true };
+  }
+
   const data = license.listRequests(state);
   return { status: 200, body: { ok: true, ...data } };
 });

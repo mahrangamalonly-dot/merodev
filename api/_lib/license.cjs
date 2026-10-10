@@ -187,6 +187,13 @@ function issueTrial(state, body) {
   return { status: 201, body: { ok: true, key: made.key, expiresAt: made.expiresAt, request: req } };
 }
 
+function removeRequest(state, body) {
+  state.requests = state.requests || [];
+  const before = state.requests.length;
+  state.requests = state.requests.filter(r => r.id !== body.id);
+  return { status: 200, body: { ok: true, removed: before - state.requests.length } };
+}
+
 function listRequests(state) {
   return { requests: state.requests || [] };
 }
@@ -223,5 +230,5 @@ function payment(state, body) {
 module.exports = {
   PLANS, generateKey, validateFormat, normalize,
   issue, activate, verify, deactivate, revoke, reactivate, remove, list, payment,
-  trialRequest, issueTrial, listRequests, isExpired, WEEK_MS
+  trialRequest, issueTrial, listRequests, removeRequest, isExpired, WEEK_MS
 };

@@ -65,6 +65,7 @@ async function load(root) {
                   ${r.status === 'pending'
                     ? `<button class="btn btn-primary btn-sm" data-act="issue">إصدار مفتاح 7 أيام</button>`
                     : `<button class="btn btn-ghost btn-sm" data-act="copy">نسخ المفتاح</button>`}
+                  <button class="icon-btn danger" data-act="remove" title="حذف الطلب">×</button>
                 </td>
               </tr>`).join('')}
           </tbody>
@@ -96,6 +97,15 @@ async function load(root) {
           await navigator.clipboard.writeText(key);
           toast('تم نسخ المفتاح', 'ok');
         } catch { toast('انسخ المفتاح يدويًا', 'err'); }
+      }
+
+      if (btn.dataset.act === 'remove') {
+        if (!(await confirmDialog('حذف هذا الطلب نهائيًا؟', 'حذف', true))) return;
+        try {
+          await api.call('/admin/requests', { method: 'DELETE', body: { id } });
+          toast('تم حذف الطلب', 'ok');
+          soft(root);
+        } catch (err) { toast(err.message, 'err'); }
       }
     });
   } catch (err) {
