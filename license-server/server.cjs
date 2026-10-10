@@ -13,7 +13,7 @@ const ORDERS_FILE = path.join(DATA_DIR, 'orders.json');
 
 const ALPHA = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const RE = /^MERO-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
-const PLANS = { basic: { devices: 1, label: 'أساسي', price: 4900 }, pro: { devices: 1, label: 'احترافي', price: 9900 }, enterprise: { devices: 10, label: 'مؤسسات', price: 7400 } };
+const PLANS = { basic: { devices: 1, label: 'أساسي', price: 1500 }, pro: { devices: 1, label: 'احترافي', price: 3500 }, enterprise: { devices: 10, label: 'مؤسسات', price: 6000 } };
 
 fs.mkdirSync(DATA_DIR, { recursive: true });
 

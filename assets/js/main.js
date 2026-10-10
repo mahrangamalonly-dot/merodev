@@ -116,9 +116,8 @@
       priceToggle.setAttribute('aria-checked', String(yearly));
       $('#labMonthly').classList.toggle('active', !yearly);
       $('#labYearly').classList.toggle('active', yearly);
-      $$('.amount').forEach(a => {
-        a.textContent = yearly ? a.dataset.y : a.dataset.m;
-      });
+      $$('.amount').forEach(a => { a.textContent = yearly ? a.dataset.y : a.dataset.m; });
+      $$('.per').forEach(p => { if (p.dataset.m && p.dataset.y) p.textContent = yearly ? p.dataset.y : p.dataset.m; });
     });
   }
 
@@ -177,9 +176,9 @@
   }
 
   const PLAN_LABELS = {
-    basic: 'الترخيص الأساسي (جهاز واحد) — 4900 ج.م',
-    pro: 'الترخيص الاحترافي (فروع متعددة) — 9900 ج.م',
-    enterprise: 'ترخيص المؤسسات (10 أجهزة فأكثر) — 7400 ج.م/جهاز'
+    basic: 'الترخيص الأساسي — 1500 ج.م دفعة واحدة أو 800 ج.م/سنة',
+    pro: 'الترخيص الاحترافي — 3500 ج.م دفعة واحدة أو 1800 ج.م/سنة',
+    enterprise: 'ترخيص المؤسسات — 6000 ج.م دفعة واحدة أو 1500 ج.م/سنة لكل جهاز'
   };
 
   $$('[data-buy]').forEach(btn => {

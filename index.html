@@ -28,9 +28,12 @@
   "description": "تطبيق نقاط بيع للويب وسطح المكتب: كاشير سريع، مخزون، تقارير، يعمل بدون إنترنت ويدعم الطابعات الحرارية.",
   "inLanguage": "ar",
   "offers": [
-    { "@type": "Offer", "name": "ترخيص أساسي", "price": "4900", "priceCurrency": "EGP", "availability": "https://schema.org/InStock" },
-    { "@type": "Offer", "name": "ترخيص احترافي", "price": "9900", "priceCurrency": "EGP", "availability": "https://schema.org/InStock" },
-    { "@type": "Offer", "name": "ترخيص مؤسسات", "price": "7400", "priceCurrency": "EGP", "availability": "https://schema.org/InStock" }
+    { "@type": "Offer", "name": "ترخيص أساسي — دفعة واحدة", "price": "1500", "priceCurrency": "EGP", "availability": "https://schema.org/InStock" },
+    { "@type": "Offer", "name": "ترخيص أساسي — اشتراك سنوي", "price": "800", "priceCurrency": "EGP", "availability": "https://schema.org/InStock" },
+    { "@type": "Offer", "name": "ترخيص احترافي — دفعة واحدة", "price": "3500", "priceCurrency": "EGP", "availability": "https://schema.org/InStock" },
+    { "@type": "Offer", "name": "ترخيص احترافي — اشتراك سنوي", "price": "1800", "priceCurrency": "EGP", "availability": "https://schema.org/InStock" },
+    { "@type": "Offer", "name": "ترخيص مؤسسات — دفعة واحدة", "price": "6000", "priceCurrency": "EGP", "availability": "https://schema.org/InStock" },
+    { "@type": "Offer", "name": "ترخيص مؤسسات — اشتراك سنوي", "price": "1500", "priceCurrency": "EGP", "availability": "https://schema.org/InStock" }
   ]
 }
 </script>
@@ -363,8 +366,8 @@
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">الترخيص</span>
-        <h2>اختر رخصتك <span class="grad">بدون رسوم مخفية</span></h2>
-        <p>ترخيص دائم لكل جهاز كاشير — بدون رسوم شهرية. الأسعار بالجنيه المصري وتشمل الضريبة.</p>
+        <h2>اختر رخصتك <span class="grad">تبدأ من 800 جنيه</span></h2>
+        <p>دفعة واحدة مدى الحياة، أو اشتراك سنوي بتحديثات ودعم. الأسعار بالجنيه المصري.</p>
       </div>
 
       <div class="toggle-wrap reveal">
@@ -372,14 +375,14 @@
         <button class="toggle" id="priceToggle" role="switch" aria-checked="false" aria-label="تبديل نوع الدفع">
           <span class="knob"></span>
         </button>
-        <span class="toggle-label" id="labYearly">مع اشتراك سنة <em>توفير 20%</em></span>
+        <span class="toggle-label" id="labYearly">اشتراك سنوي <em>توفير أكثر</em></span>
       </div>
 
       <div class="plans">
         <article class="plan reveal">
           <h3>ترخيص أساسي</h3>
           <p class="plan-desc">لمحل أو كافتيريا بجهاز كاشير واحد.</p>
-          <div class="price"><span class="cur">ج.م</span><span class="amount" data-m="4900" data-y="3900">4900</span><span class="per">/جهاز · دفعة واحدة</span></div>
+          <div class="price"><span class="cur">ج.م</span><span class="amount" data-m="1500" data-y="800">1500</span><span class="per" data-m="دفعة واحدة · مدى الحياة" data-y="/سنة · جهاز واحد">دفعة واحدة · مدى الحياة</span></div>
           <ul>
             <li>ترخيص دائم لجهاز واحد</li>
             <li>كاشير كامل + مخزون + تقارير</li>
@@ -393,7 +396,7 @@
           <span class="plan-badge">الأكثر طلبًا</span>
           <h3>ترخيص احترافي</h3>
           <p class="plan-desc">للمحلات النشطة وفرعين أو أكثر.</p>
-          <div class="price"><span class="cur">ج.م</span><span class="amount" data-m="9900" data-y="7900">9900</span><span class="per">/جهاز · دفعة واحدة</span></div>
+          <div class="price"><span class="cur">ج.م</span><span class="amount" data-m="3500" data-y="1800">3500</span><span class="per" data-m="دفعة واحدة · مدى الحياة" data-y="/سنة · جهاز واحد">دفعة واحدة · مدى الحياة</span></div>
           <ul>
             <li>كل مميزات الأساسي</li>
             <li>إدارة فروع متعددة من لوحة واحدة</li>
@@ -406,8 +409,8 @@
 
         <article class="plan reveal d2">
           <h3>ترخيص مؤسسات</h3>
-          <p class="plan-desc">للسلاسل والمتاجر الكبيرة.</p>
-          <div class="price"><span class="cur">ج.م</span><span class="amount" data-m="7400" data-y="5900">7400</span><span class="per">/جهاز · حد أدنى 10</span></div>
+          <p class="plan-desc">للسلاسل والمتاجر الكبيرة (10 أجهزة فأكثر).</p>
+          <div class="price"><span class="cur">ج.م</span><span class="amount" data-m="6000" data-y="1500">6000</span><span class="per" data-m="دفعة واحدة · لكل جهاز" data-y="/سنة · لكل جهاز">دفعة واحدة · لكل جهاز</span></div>
           <ul>
             <li>خصم على عدد الأجهزة</li>
             <li>تخصيص النظام على هويتك</li>

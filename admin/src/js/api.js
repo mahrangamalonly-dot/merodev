@@ -52,9 +52,9 @@ export const api = {
 };
 
 export const PLANS = {
-  basic: { label: 'أساسي', devices: 1, price: 4900 },
-  pro: { label: 'احترافي', devices: 1, price: 9900 },
-  enterprise: { label: 'مؤسسات', devices: 10, price: 7400 }
+  basic: { label: 'أساسي', devices: 1, price: 1500 },
+  pro: { label: 'احترافي', devices: 1, price: 3500 },
+  enterprise: { label: 'مؤسسات', devices: 10, price: 6000 }
 };
 
 export const planLabel = k => (PLANS[k] || { label: k }).label;
