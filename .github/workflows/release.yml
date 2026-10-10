@@ -6,6 +6,9 @@ on:
       - 'v*'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     strategy:
@@ -30,10 +33,9 @@ jobs:
         working-directory: pos
 
       - name: Build (${{ matrix.target }})
-        run: npx electron-builder --${{ matrix.target }} --publish always
+        run: npx electron-builder --${{ matrix.target }} --publish never
         working-directory: pos
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
 
       - name: Upload artifacts
@@ -44,4 +46,19 @@ jobs:
             pos/dist/*.exe
             pos/dist/*.AppImage
             pos/dist/*.blockmap
-          if-no-files-found: ignore
+          if-no-files-found: warn
+
+      - name: Attach to release
+        if: ${{ matrix.target == 'win' }}
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Mero Dev POS ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          files: |
+            pos/dist/*.exe
+            pos/dist/*.AppImage
+            pos/dist/*.blockmap
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
