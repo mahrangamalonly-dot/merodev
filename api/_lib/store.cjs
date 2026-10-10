@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const KV_URL = process.env.KV_REST_API_URL || '';
-const KV_TOKEN = process.env.KV_REST_API_TOKEN || '';
+const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || '';
+const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '';
 const STATE_KEY = 'mero:license:v1';
 
 const empty = () => ({ keys: [], orders: [] });
@@ -47,7 +47,6 @@ function writeLocal(state, root) {
 }
 
 const hasKV = () => Boolean(KV_URL && KV_TOKEN);
-
 module.exports = {
   hasKV,
   async load(root) {
