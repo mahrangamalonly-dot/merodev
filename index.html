@@ -1,0 +1,526 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mero Dev POS — تطبيق نقاط البيع لمحلك ومطعمك</title>
+<meta name="description" content="Mero Dev POS: تطبيق نقاط بيع للويب وسطح المكتب — كاشير سريع، مخزون، تقارير، يعمل أوفلاين ويدعم الطابعات الحرارية.">
+<link rel="canonical" href="https://merodev.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mero Dev">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:url" content="https://merodev.com/">
+<meta property="og:title" content="Mero Dev POS — تطبيق نقاط البيع لمحلك ومطعمك">
+<meta property="og:description" content="كاشير سريع يعمل على الويب وسطح المكتب، يشتغل بدون إنترنت، ويدعم الطابعات الحرارية ودرج النقود.">
+<meta property="og:image" content="https://merodev.com/assets/img/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mero Dev POS — تطبيق نقاط البيع لمحلك ومطعمك">
+<meta name="twitter:description" content="كاشير سريع يعمل على الويب وسطح المكتب، يشتغل بدون إنترنت، ويدعم الطابعات الحرارية ودرج النقود.">
+<meta name="twitter:image" content="https://merodev.com/assets/img/og.svg">
+<meta name="theme-color" content="#07030f">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Mero Dev POS",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Windows, Linux, Web",
+  "description": "تطبيق نقاط بيع للويب وسطح المكتب: كاشير سريع، مخزون، تقارير، يعمل بدون إنترنت ويدعم الطابعات الحرارية.",
+  "inLanguage": "ar",
+  "offers": [
+    { "@type": "Offer", "name": "ترخيص أساسي", "price": "99", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+    { "@type": "Offer", "name": "ترخيص احترافي", "price": "199", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+    { "@type": "Offer", "name": "ترخيص مؤسسات", "price": "149", "priceCurrency": "USD", "availability": "https://schema.org/InStock" }
+  ]
+}
+</script>
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/config.js"></script>
+</head>
+<body>
+
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-orb orb-1" aria-hidden="true"></div>
+<div class="bg-orb orb-2" aria-hidden="true"></div>
+<div class="bg-noise" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top" aria-label="Mero Dev POS">
+      <span class="brand-mark">
+        <svg viewBox="0 0 64 64" width="34" height="34" aria-hidden="true">
+          <defs>
+            <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#7c3aed"/><stop offset="1" stop-color="#e879f9"/>
+            </linearGradient>
+          </defs>
+          <rect x="2" y="2" width="60" height="60" rx="16" fill="#12081f" stroke="url(#lg)" stroke-width="2"/>
+          <path d="M18 18v10h28V18z" fill="url(#lg)"/>
+          <path d="M18 32h14v14H18z" fill="url(#lg)" opacity=".75"/>
+          <circle cx="45" cy="40" r="6.5" fill="#e879f9"/>
+        </svg>
+      </span>
+      <span class="brand-text">Mero<span class="brand-dev">Dev</span></span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#features">المميزات</a>
+      <a href="#branches">الفروع</a>
+      <a href="#download">التحميل</a>
+      <a href="#pricing">الترخيص</a>
+      <a href="#faq">الأسئلة</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="#download" class="btn btn-ghost btn-sm">نسخة تجريبية</a>
+      <a href="#pricing" class="btn btn-primary btn-sm" data-buy="pro">اشترِ الآن</a>
+      <button class="nav-toggle" id="navToggle" aria-label="القائمة" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="pill">
+          <span class="dot"></span> تطبيق POS · ويب + سطح مكتب (إلكترون)
+        </span>
+        <h1 class="reveal d1">
+          تطبيق نقاط بيع <span class="grad">جاهز لمحلك</span> من أول يوم
+        </h1>
+        <p class="lead reveal d2">
+          Mero Dev POS كاشير سريع يعمل على الويب وسطح المكتب، يشتغل حتى بدون إنترنت،
+          ويدعم الطابعات الحرارية ودرج النقود. ثبّته، فعّل الرخصة، وابدأ البيع.
+        </p>
+        <div class="hero-cta reveal d3">
+          <a href="#download" class="btn btn-primary btn-lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M4 19h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            حمّل النسخة التجريبية
+          </a>
+          <a href="#features" class="btn btn-outline btn-lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+            شاهد النظام
+          </a>
+        </div>
+        <ul class="hero-trust reveal d4">
+          <li>ترخيص دائم بدون رسوم شهرية إلزامية</li>
+          <li>تثبيت في 10 دقائق</li>
+          <li>دعم عربي</li>
+        </ul>
+
+        <div class="stats reveal d5">
+          <div class="stat">
+            <span class="stat-num" data-count="3200">0</span><span class="stat-plus">+</span>
+            <span class="stat-label">نقطة بيع تعمل بالنظام</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num" data-count="18">0</span><span class="stat-plus"></span>
+            <span class="stat-label">مجال عمل مختلف</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num" data-count="99">0</span><span class="stat-plus">.9%</span>
+            <span class="stat-label">ثبات بدون أعطال</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal d2">
+        <div class="device">
+          <div class="device-bar">
+            <span class="tl r"></span><span class="tl y"></span><span class="tl g"></span>
+            <span class="device-title">Mero POS — الشاشة الرئيسية</span>
+            <span class="live"><span class="dot"></span>متصلة</span>
+          </div>
+          <div class="device-body">
+            <div class="pos-grid">
+              <div class="pos-products" id="posProducts"></div>
+              <div class="pos-side">
+                <div class="pos-total">
+                  <span>الإجمالي</span>
+                  <strong id="posTotal">0.00</strong>
+                </div>
+                <div class="pos-rows" id="posRows"></div>
+                <button class="pos-pay" id="posPay">إتمام البيع</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="float-card fc-1">
+          <div class="fc-head">
+            <span class="fc-ico ok">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            تمت الطباعة
+          </div>
+          <div class="fc-body">فاتورة رقم #10482</div>
+        </div>
+
+        <div class="float-card fc-2">
+          <div class="fc-head">
+            <span class="fc-ico pulse">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2.5"/></svg>
+            </span>
+            بدون إنترنت
+          </div>
+          <div class="fc-body">البيع مستمر · مزامنة تلقائية</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="logos">
+      <div class="container">
+        <p class="logos-title">مستخدم في المطاعم والمتاجر والصيدليات والسوبر ماركت</p>
+        <div class="logos-track">
+          <div class="logos-row">
+            <span>CAFÉ NOVA</span><span>AL RETAIL</span><span>PHARMA+</span><span>BAKERY 7</span><span>SUPER MERO</span><span>CHA TIME</span><span>FRESH MART</span>
+            <span>CAFÉ NOVA</span><span>AL RETAIL</span><span>PHARMA+</span><span>BAKERY 7</span><span>SUPER MERO</span><span>CHA TIME</span><span>FRESH MART</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">مميزات التطبيق</span>
+        <h2>كل أدوات الكاشير <span class="grad">في شاشة واحدة</span></h2>
+        <p>من البيع إلى المخزون إلى التقارير — التطبيق يغطي دورة العمل كاملة.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card reveal">
+          <span class="card-ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 7h18v12H3z" stroke="currentColor" stroke-width="1.8"/><path d="M8 7V5h8v2M8 12h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+          <h3>كاشير سريع</h3>
+          <p>بيع باللمس مع باركود، كميات، خصومات، ودفع مقسّم — كل عملية في ثوانٍ.</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card-ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 20V10M10 20V4M16 20v-7M22 20V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+          <h3>مخزون وتقارير</h3>
+          <p>تتبع الكميات، تنبيه عند النفاد، وتقارير مبيعات وأرباح لحظية.</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card-ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 4h14v16H5z" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h8M8 12h8M8 16h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+          <h3>فواتير وطباعة</h3>
+          <p>فواتير حرارية 80mm مع شعارك وبياناتك الضريبية، ودعم أكثر من طابعة.</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card-ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4v6c0 5-3.5 7.4-8 8-4.5-.6-8-3-8-8V7z" stroke="currentColor" stroke-width="1.8"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+          <h3>مستخدمون وصلاحيات</h3>
+          <p>حساب لكل كاشير مع صلاحياته، وسجل كامل بكل عملية داخل النظام.</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card-ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 12a9 9 0 1 1-3-6.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M21 4v5h-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+          <h3>يعمل أوفلاين</h3>
+          <p>استمر في البيع عند انقطاع الإنترنت، وستتم المزامنة تلقائيًا عند العودة.</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card-ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h10M4 18h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="18" cy="17" r="3.2" stroke="currentColor" stroke-width="1.8"/></svg>
+          </span>
+          <h3>منيو مرن</h3>
+          <p>منتجات، إضافات، أحجام، وتصنيفات — يخدم المطاعم والمتاجر معًا.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section split" id="branches">
+    <div class="container split-inner">
+      <div class="split-copy reveal">
+        <span class="eyebrow">إضافة اختيارية</span>
+        <h2>عندك أكثر من فرع؟ <span class="grad">تحكم بهم من مكان واحد</span></h2>
+        <p>
+          لوحة الإدارة المرفقة مع التطبيق تتيح لك ربط كل فروعك، تغيير الأسعار
+          والإعدادات عليهم، ومتابعة المبيعات — بدون الدخول على كل جهاز.
+        </p>
+        <ul class="ticks">
+          <li>دعم فروع متعددة وربط كل جهاز برمز اقتران</li>
+          <li>تغيير الأسعار والإعدادات عن بعد بضغطة</li>
+          <li>تقارير موحّدة لكل الفروع أو فرع محدد</li>
+          <li>تحديثات النسخ تُوزّع على كل الأجهزة تلقائيًا</li>
+        </ul>
+        <a href="#pricing" class="btn btn-primary">مشاهدة الخطط</a>
+      </div>
+
+      <div class="split-visual reveal d2">
+        <div class="console">
+          <div class="console-top">
+            <span class="console-dots"><i></i><i></i><i></i></span>
+            <span class="console-path">mero.pos/admin/branches</span>
+          </div>
+          <div class="console-body">
+            <div class="console-row"><span class="tag tag-violet">فرع</span><code>main.store</code><span class="console-meta">4 أجهزة</span><span class="badge-ok">online</span></div>
+            <div class="console-row"><span class="tag tag-pink">فرع</span><code>branch.02</code><span class="console-meta">2 أجهزة</span><span class="badge-ok">online</span></div>
+            <div class="console-row"><span class="tag tag-blue">فرع</span><code>cafe.nova</code><span class="console-meta">3 أجهزة</span><span class="badge-wait">idle</span></div>
+            <div class="console-row"><span class="tag tag-violet">مبيعات</span><code>today · all</code><span class="console-meta">48,320 ر.س</span><span class="badge-ok">+12%</span></div>
+            <div class="console-bar"><span id="consoleBar"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="download">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">التحميل</span>
+        <h2>حمّل التطبيق وابدأ <span class="grad">اليوم</span></h2>
+        <p>متاح لنظامي ويندوز ولينكس، ونسخة ويب تعمل من المتصفح مباشرة.</p>
+      </div>
+
+      <div class="plans">
+        <article class="plan reveal">
+          <h3>نسخة ويندوز</h3>
+          <p class="plan-desc">تطبيق سطح المكتب لأجهزة الكاشير.</p>
+          <ul>
+            <li>Windows 10 / 11 · 64-bit</li>
+            <li>حجم التثبيت ~120 ميجابايت</li>
+            <li>تحديثات تلقائية داخل التطبيق</li>
+          </ul>
+          <a href="#download" class="btn btn-primary btn-block" data-download="win">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5l7.5-1v7.2H3zM11.4 4.3L21 3v8.7h-9.6zM3 12.9h7.5v7.2L3 19zM11.4 12.9H21V22l-9.6-1.3z"/></svg>
+            تحميل لـ Windows
+          </a>
+        </article>
+
+        <article class="plan featured reveal d1">
+          <span class="plan-badge">الأكثر استخدامًا</span>
+          <h3>نسخة الويب</h3>
+          <p class="plan-desc">تعمل من أي متصفح بدون تثبيت.</p>
+          <ul>
+            <li>Chrome · Edge · Safari</li>
+            <li>مناسبة للأجهزة اللوحية</li>
+            <li>نفس البيانات والإعدادات</li>
+          </ul>
+          <a href="#download" class="btn btn-primary btn-block" data-download="web">افتح النسخة التجريبية</a>
+        </article>
+
+        <article class="plan reveal d2">
+          <h3>نسخة لينكس</h3>
+          <p class="plan-desc">لأجهزة الكاشير المبنية على لينكس.</p>
+          <ul>
+            <li>Ubuntu 20.04+ · AppImage</li>
+            <li>دعم الطابعات الحرارية</li>
+            <li>استهلاك موارد منخفض</li>
+          </ul>
+          <a href="#download" class="btn btn-outline btn-block" data-download="linux">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c2.2 0 3.3 1.8 3.2 4.2 2.2-.9 4.6-.4 5.7 1.6-1.6 1.5-3.5 1.6-5 1 .4 2.5-.6 4.6-2.9 5.6 1.2 1 1.9 2.2 1.8 3.6-1.9.6-3.5-.1-4.3-1.6-.9 1.2-2.4 1.8-4.3 1.4-.2-1.6.5-2.9 1.8-3.7-2-1.2-2.8-3.2-2.1-5.4-1.5.7-3.4.6-5-1 1.2-2 3.6-2.4 5.7-1.4C8.7 3.8 9.8 2 12 2z"/></svg>
+            تحميل AppImage
+          </a>
+        </article>
+      </div>
+
+      <div class="req-wrap">
+        <div class="req reveal">
+          <h4>متطلبات التشغيل</h4>
+          <div class="req-grid">
+            <div><span>المعالج</span><strong>ثنائي النواة 2.0 GHz</strong></div>
+            <div><span>الذاكرة</span><strong>4 جيجابايت</strong></div>
+            <div><span>القرص</span><strong>500 ميجابايت</strong></div>
+            <div><span>الشاشة</span><strong>1280×800 أو أعلى</strong></div>
+            <div><span>الأجهزة</span><strong>طابعة حرارية 80mm</strong></div>
+            <div><span>الشبكة</span><strong>اختياري (يعمل أوفلاين)</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">الترخيص</span>
+        <h2>اختر رخصتك <span class="grad">بدون رسوم مخفية</span></h2>
+        <p>ترخيص لكل جهاز كاشير. الخطط السنوية تضيف التحديثات والدعم.</p>
+      </div>
+
+      <div class="toggle-wrap reveal">
+        <span class="toggle-label active" id="labMonthly">دفعة واحدة</span>
+        <button class="toggle" id="priceToggle" role="switch" aria-checked="false" aria-label="تبديل نوع الدفع">
+          <span class="knob"></span>
+        </button>
+        <span class="toggle-label" id="labYearly">سنوي <em>توفير</em></span>
+      </div>
+
+      <div class="plans">
+        <article class="plan reveal">
+          <h3>ترخيص أساسي</h3>
+          <p class="plan-desc">لمحل أو كافتيريا بجهاز كاشير واحد.</p>
+          <div class="price"><span class="cur">$</span><span class="amount" data-m="99" data-y="79">99</span><span class="per">/جهاز</span></div>
+          <ul>
+            <li>ترخيص دائم لجهاز واحد</li>
+            <li>كاشير كامل + مخزون + تقارير</li>
+            <li>طباعة فواتير حرارية</li>
+            <li>تحديثات لمدة 6 أشهر</li>
+          </ul>
+          <a href="#pricing" class="btn btn-outline btn-block" data-buy="basic">اشترِ الترخيص</a>
+        </article>
+
+        <article class="plan featured reveal d1">
+          <span class="plan-badge">الأكثر طلبًا</span>
+          <h3>ترخيص احترافي</h3>
+          <p class="plan-desc">للمحلات النشطة وفرعين أو أكثر.</p>
+          <div class="price"><span class="cur">$</span><span class="amount" data-m="199" data-y="159">199</span><span class="per">/جهاز</span></div>
+          <ul>
+            <li>كل مميزات الأساسي</li>
+            <li>إدارة فروع متعددة من لوحة واحدة</li>
+            <li>صلاحيات وسجل تدقيق للمستخدمين</li>
+            <li>تحديثات ودعم لمدة سنة</li>
+            <li>نسخ احتياطي يومي</li>
+          </ul>
+          <a href="#pricing" class="btn btn-primary btn-block" data-buy="pro">اشترِ الترخيص</a>
+        </article>
+
+        <article class="plan reveal d2">
+          <h3>ترخيص مؤسسات</h3>
+          <p class="plan-desc">للسلاسل والمتاجر الكبيرة.</p>
+          <div class="price"><span class="cur">$</span><span class="amount" data-m="149" data-y="119">149</span><span class="per">/جهاز · حد أدنى 10</span></div>
+          <ul>
+            <li>خصم على عدد الأجهزة</li>
+            <li>تخصيص النظام على هويتك</li>
+            <li>تكامل API وأنظمة خارجية</li>
+            <li>تدريب وتركيب عن بعد</li>
+            <li>دعم مباشر وتحديثات مدى الحياة</li>
+          </ul>
+          <a href="#pricing" class="btn btn-outline btn-block" data-buy="enterprise">اطلب عرض سعر</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container narrow">
+      <div class="section-head reveal">
+        <span class="eyebrow">الأسئلة الشائعة</span>
+        <h2>قبل ما <span class="grad">تشتري</span></h2>
+      </div>
+      <div class="faq">
+        <details class="faq-item reveal">
+          <summary>هل الترخيص لمرة واحدة أم اشتراك؟<span class="chev"></span></summary>
+          <div class="faq-body">الترخيص الأساسي دائم لجهاز واحد. الاشتراك السنوي اختياري يمنحك التحديثات والدعم ولوحة إدارة الفروع.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>هل يعمل التطبيق بدون إنترنت؟<span class="chev"></span></summary>
+          <div class="faq-body">نعم، البيع والمخزون يعملان محليًا بالكامل، وتتم المزامنة تلقائيًا عند عودة الاتصال.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>ما الطابعات المدعومة؟<span class="chev"></span></summary>
+          <div class="faq-body">الطابعات الحرارية 80mm عبر USB أو الشبكة، بالإضافة إلى درج النقود وقارئ الباركود.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>هل يمكن نقل الترخيص لجهاز آخر؟<span class="chev"></span></summary>
+          <div class="faq-body">نعم، يمكن إلغاء تنشيط الجهاز القديم من داخل التطبيق وتنشيط الترخيص على جهاز جديد.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>هل بياناتي محفوظة؟<span class="chev"></span></summary>
+          <div class="faq-body">بياناتك تُخزَّن على جهازك محليًا، ويمكنك تشغيل نسخ احتياطي تلقائي على خدمات التخزين السحابي.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contact">
+    <div class="container">
+      <div class="cta-box reveal">
+        <div class="cta-copy">
+          <h2>جاهز تشغّل <span class="grad">Mero Dev POS</span>؟</h2>
+          <p>اترك بياناتك وسنرسل لك رابط النسخة التجريبية ودليل التثبيت فورًا.</p>
+        </div>
+        <form class="cta-form" id="ctaForm" novalidate>
+          <div class="field">
+            <input type="text" id="cName" name="name" placeholder=" " required>
+            <label for="cName">الاسم</label>
+          </div>
+          <div class="field">
+            <input type="email" id="cMail" name="email" placeholder=" " required>
+            <label for="cMail">البريد الإلكتروني</label>
+          </div>
+          <div class="field">
+            <input type="tel" id="cPhone" name="phone" placeholder=" ">
+            <label for="cPhone">الجوال / واتساب (اختياري)</label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block" id="ctaBtn">اطلب النسخة التجريبية</button>
+          <p class="form-note" id="formNote" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="#top">
+        <span class="brand-mark">
+          <svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true">
+            <rect x="2" y="2" width="60" height="60" rx="16" fill="#12081f" stroke="url(#lg)" stroke-width="2"/>
+            <path d="M18 18v10h28V18z" fill="url(#lg)"/>
+            <path d="M18 32h14v14H18z" fill="url(#lg)" opacity=".75"/>
+            <circle cx="45" cy="40" r="6.5" fill="#e879f9"/>
+          </svg>
+        </span>
+        <span class="brand-text">Mero<span class="brand-dev">Dev</span></span>
+      </a>
+      <p>تطبيق نقاط بيع عربي للويب وسطح المكتب — سريع، موثوق، ويعمل بدون إنترنت.</p>
+      <div class="socials">
+        <a href="#contact" aria-label="واتساب"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.2 1.2-1.9 1.2-.6 0-1.9-.3-3.6-1.6-1.9-1.4-3.1-3.4-3.2-3.6-.2-.4-.5-1.2-.5-1.9 0-.8.4-1.3.7-1.6.2-.2.4-.3.7-.3h.5c.2 0 .4.1.6.5l.7 1.6c.1.2.1.4 0 .6l-.3.5-.3.3c-.1.1-.2.3 0 .6.3.5.8 1.2 1.4 1.7.8.7 1.4 1 1.7 1.1.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.5.8c.3.2.4.3.4.5s0 .8-.1 1.3z"/></svg></a>
+        <a href="#contact" aria-label="بريد"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        <a href="#contact" aria-label="موقع"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c3 3.5 3 14 0 18-3-4-3-14.5 0-18z" stroke="currentColor" stroke-width="1.8"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>المنتج</h4>
+      <a href="#features">المميزات</a>
+      <a href="#download">التحميل</a>
+      <a href="#branches">الفروع</a>
+      <a href="#pricing">الترخيص</a>
+    </div>
+    <div class="footer-col">
+      <h4>الدعم</h4>
+      <a href="#faq">الأسئلة الشائعة</a>
+      <a href="#contact">تواصل معنا</a>
+      <a href="#contact">دليل التثبيت</a>
+      <a href="#contact">طلب ترخيص</a>
+    </div>
+    <div class="footer-col">
+      <h4>قانوني</h4>
+      <a href="#contact">شروط الترخيص</a>
+      <a href="#contact">سياسة الاسترجاع</a>
+      <a href="#contact">الأمان</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© <span id="year"></span> Mero Dev. جميع الحقوق محفوظة.</span>
+    <span class="made">صُنع بشغف في الوطن العربي</span>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{
+  "name": "mero-dev-pos",
+  "productName": "Mero Dev POS",
+  "version": "1.0.0",
+  "description": "تطبيق نقاط بيع - كاشير، مخزون، تقارير. يعمل أوفلاين ويدعم الويب وسطح المكتب.",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "start": "node server.cjs",
+    "dev": "node server.cjs",
+    "electron": "electron .",
+    "dist": "electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "com.merodev.pos",
+    "productName": "Mero Dev POS",
+    "artifactName": "Mero.Dev.POS.${ext}",
+    "files": [
+      "index.html",
+      "assets/**/*",
+      "src/**/*",
+      "server.cjs",
+      "electron/**/*"
+    ],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "mero-dev",
+        "repo": "mero-pos"
+      }
+    ],
+    "win": {
+      "target": ["nsis"],
+      "publisherName": "Mero Dev"
+    },
+    "linux": { "target": "AppImage" }
+  },
+  "devDependencies": {
+    "electron": "^32.0.0",
+    "electron-builder": "^25.1.8"
+  }
+}

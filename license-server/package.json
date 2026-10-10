@@ -1,0 +1,12 @@
+{
+  "name": "mero-license-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "سيرفر تراخيص Mero Dev POS — إصدار، تفعيل، تحقق، وإلغاء تنشيط",
+  "main": "server.cjs",
+  "scripts": {
+    "start": "node server.cjs",
+    "gen": "node cli.cjs batch"
+  },
+  "engines": { "node": ">=18" }
+}

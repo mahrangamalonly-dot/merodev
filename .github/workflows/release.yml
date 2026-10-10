@@ -1,0 +1,47 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            target: win
+          - os: ubuntu-latest
+            target: linux
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --include=dev || npm install --include=dev
+        working-directory: pos
+
+      - name: Build (${{ matrix.target }})
+        run: npx electron-builder --${{ matrix.target }} --publish always
+        working-directory: pos
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: pos-${{ matrix.target }}
+          path: |
+            pos/dist/*.exe
+            pos/dist/*.AppImage
+            pos/dist/*.blockmap
+          if-no-files-found: ignore
