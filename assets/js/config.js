@@ -1,6 +1,6 @@
 window.MERO_CONFIG = {
-  domain: 'merodev.vercel.app',
-  siteUrl: 'https://merodev.vercel.app',
+  domain: 'brisk-quartz-dyxq9vb.vercel.app',
+  siteUrl: 'https://brisk-quartz-dyxq9vb.vercel.app',
 
   checkout: '',
 
@@ -8,12 +8,11 @@ window.MERO_CONFIG = {
 
   releases: 'https://github.com/mahrangamalonly-dot/merodev/releases',
 
-  whatsapp: '',
+  whatsapp: '201022628128',
 
-  email: 'sales@merodev.com',
+  email: '',
 
-  instapay: '',
-  vodafoneCash: '',
+  instapay: 'mahranmeza@instapay',
 
-  demoKey: ''
+  vodafoneCash: ''
 };
