@@ -100,6 +100,8 @@ function renderShell(root) {
 
 function route(root) {
   if (!api.credentials.token) { renderGate(root, null); return; }
+  if (!root.querySelector('#sideNav')) { renderShell(root); return; }
+
   const path = (location.hash.replace(/^#\/?/, '') || 'dashboard').split('?')[0];
   const target = routes.find(r => r.path === path) || routes[0];
 
