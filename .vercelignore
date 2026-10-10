@@ -1,0 +1,14 @@
+.git
+.github
+node_modules
+pos/node_modules
+admin/node_modules
+license-server/node_modules
+license-server/data
+pos/dist
+pos/out
+admin/dist
+*.log
+.DS_Store
+.env
+.env.local
