@@ -30,11 +30,17 @@ function createServer() {
       return;
     }
 
-    fs.readFile(filePath, (err, data) => {
-      if (err) {
+  fs.readFile(filePath, (err, data) => {
+    if (err) {
+      fs.stat(filePath, (statErr, stats) => {
+        if (!statErr && stats.isDirectory()) {
+          res.writeHead(302, { Location: `${urlPath.replace(/\/?$/, '/')}index.html` }).end();
+          return;
+        }
         res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' }).end('Not Found');
-        return;
-      }
+      });
+      return;
+    }
       const ext = path.extname(filePath).toLowerCase();
       res.writeHead(200, {
         'Content-Type': MIME[ext] || 'application/octet-stream',

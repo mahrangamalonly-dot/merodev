@@ -188,6 +188,13 @@ svg{display:block}
   padding:.45rem .7rem;border-radius:9px;background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.28);
 }
 .lic-chip svg{width:15px;height:15px}
+.dash-link{
+  display:flex;align-items:center;gap:.7rem;padding:.6rem .8rem;border-radius:11px;
+  color:var(--neon-2);font-weight:700;font-size:.88rem;transition:.18s;
+  background:rgba(168,85,247,.1);border:1px solid var(--line);
+}
+.dash-link svg{width:18px;height:18px}
+.dash-link:hover{color:#fff;background:rgba(168,85,247,.25);border-color:var(--neon)}
 
 .main{display:flex;flex-direction:column;height:100vh;overflow:hidden}
 .topbar{
