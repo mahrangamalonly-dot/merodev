@@ -9,7 +9,6 @@ const sources = [
 ].filter(s => s.url && s.token);
 
 const empty = () => ({ keys: [], orders: [] });
-let cached = null;
 
 const base = source => source.url.replace(/\/+$/, '');
 
@@ -51,31 +50,25 @@ function writeLocal(state, root) {
 }
 
 async function load(root) {
-  if (cached) return cached;
   for (const source of sources) {
     try {
-      cached = await kvGet(source, STATE_KEY);
-      return cached;
+      return await kvGet(source, STATE_KEY);
     } catch (err) {
       console.error(`store: read ${source.name} failed ->`, err.message);
     }
   }
-  const local = readLocal(root);
-  cached = local;
-  return local;
+  return readLocal(root);
 }
 
 async function save(state, root) {
   for (const source of sources) {
     try {
       await kvSet(source, STATE_KEY, JSON.stringify(state));
-      cached = state;
       return;
     } catch (err) {
       console.error(`store: write ${source.name} failed ->`, err.message);
     }
   }
-  cached = state;
   try {
     writeLocal(state, root);
   } catch (err) {
