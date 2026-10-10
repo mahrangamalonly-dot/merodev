@@ -130,6 +130,14 @@ function reactivate(state, body) {
   return { status: 200, body: { ok: true, usedDevices: row.devices.length } };
 }
 
+function remove(state, body) {
+  const { row } = findKey(state, body.key);
+  if (!row) return { status: 404, body: { ok: false, error: 'key_not_found' } };
+  const before = state.keys.length;
+  state.keys = state.keys.filter(k => k.key !== row.key);
+  return { status: 200, body: { ok: true, removed: before - state.keys.length } };
+}
+
 function list(state) {
   return {
     keys: state.keys.map(k => ({ ...k, deviceCount: k.devices.length })),
@@ -161,5 +169,5 @@ function payment(state, body) {
 
 module.exports = {
   PLANS, generateKey, validateFormat, normalize,
-  issue, activate, verify, deactivate, revoke, reactivate, list, payment
+  issue, activate, verify, deactivate, revoke, reactivate, remove, list, payment
 };

@@ -81,6 +81,7 @@ async function load(root) {
                   <button class="icon-btn" data-act="copy" title="نسخ">${ICONS.copy}</button>
                   <button class="icon-btn" data-act="devices" title="الأجهزة">${ICONS.dash}</button>
                   <button class="icon-btn danger" data-act="revoke" title="إلغاء المفتاح" ${k.status === 'revoked' ? 'disabled' : ''}>${ICONS.trash}</button>
+                  <button class="icon-btn danger" data-act="delete" title="حذف نهائي">${ICONS.trash}${ICONS.trash}</button>
                 </td>
               </tr>`).join('')}
           </tbody>
@@ -104,6 +105,14 @@ async function load(root) {
         try {
           await api.revoke(key);
           toast('تم إلغاء المفتاح', 'ok');
+          load(root);
+        } catch (err) { toast(err.message, 'err'); }
+      }
+      if (act === 'delete') {
+        if (!(await confirmDialog(`حذف المفتاح ${key} نهائيًا؟ لا يمكن التراجع.`, 'حذف نهائي', true))) return;
+        try {
+          await api.delete(key);
+          toast('تم حذف المفتاح', 'ok');
           load(root);
         } catch (err) { toast(err.message, 'err'); }
       }

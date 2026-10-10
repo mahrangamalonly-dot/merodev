@@ -42,6 +42,7 @@ export const api = {
     return this.call('/admin/keys', { method: 'POST', body: { count, plan, note } });
   },
   revoke(key) { return this.call('/admin/revoke', { method: 'POST', body: { key } }); },
+  delete(key) { return this.call('/admin/delete', { method: 'POST', body: { key } }); },
   reactivate(key, deviceId) {
     return this.call('/admin/reactivate', { method: 'POST', body: { key, deviceId } });
   },
