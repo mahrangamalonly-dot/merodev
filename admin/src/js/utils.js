@@ -93,6 +93,7 @@ export function timeAgo(iso) {
 export const ICONS = {
   dash: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 13h6V4H4zM14 20h6v-9h-6zM4 20h6v-4H4zM14 8h6V4h-6z" stroke="currentColor" stroke-width="1.7"/></svg>',
   key: '<svg viewBox="0 0 24 24" fill="none"><circle cx="8" cy="15" r="4.5" stroke="currentColor" stroke-width="1.7"/><path d="M11.5 11.5L20 3M17 6l3 3M14 9l2.5 2.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+  inbox: '<svg viewBox="0 0 24 24" fill="none"><path d="M3 12l2-7h14l2 7v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M3 12h5l1 2h6l1-2h5" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>',
   cart: '<svg viewBox="0 0 24 24" fill="none"><path d="M3 5h2l2.5 11h11L19 8H6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.6" fill="currentColor"/><circle cx="17" cy="20" r="1.6" fill="currentColor"/></svg>',
   gear: '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M18 6l-2 2M8 16l-2 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
   plus: '<svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',

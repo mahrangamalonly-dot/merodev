@@ -3,10 +3,13 @@ const crypto = require('crypto');
 const ALPHA = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const RE = /^MERO-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
 const PLANS = {
+  trial: { devices: 1, label: 'تجريبي (7 أيام)', price: 0, days: 7 },
   basic: { devices: 1, label: 'أساسي', price: 1500 },
   pro: { devices: 1, label: 'احترافي', price: 3500 },
   enterprise: { devices: 10, label: 'مؤسسات', price: 6000 }
 };
+
+const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
 function checksum(head) {
   let sum = 0;
@@ -31,7 +34,7 @@ function findKey(state, key) {
   return { k, row: state.keys.find(x => x.key === k) };
 }
 
-function issue(state, count, plan, note) {
+function issue(state, count, plan, note, options = {}) {
   const made = [];
   for (let i = 0; i < count; i++) {
     const row = {
@@ -42,18 +45,24 @@ function issue(state, count, plan, note) {
       revokedDevices: [],
       note: note || '',
       status: 'active',
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      expiresAt: null
     };
+    if (options.expiresAt) row.expiresAt = options.expiresAt;
+    else if ((PLANS[plan] || {}).days) row.expiresAt = new Date(Date.now() + PLANS[plan].days * 24 * 60 * 60 * 1000).toISOString();
     state.keys.push(row);
     made.push(row);
   }
   return made;
 }
 
+const isExpired = row => row.expiresAt && new Date(row.expiresAt).getTime() < Date.now();
+
 function activate(state, body) {
   const { k, row } = findKey(state, body.key);
   if (!validateFormat(k) || !row) return { status: 404, body: { ok: false, error: 'key_not_found' } };
   if (row.status !== 'active') return { status: 403, body: { ok: false, error: 'key_revoked' } };
+  if (isExpired(row)) return { status: 403, body: { ok: false, error: 'key_expired' } };
   if (!body.deviceId) return { status: 400, body: { ok: false, error: 'device_required' } };
 
   const existing = row.devices.find(d => d.id === body.deviceId);
@@ -87,6 +96,7 @@ function verify(state, body) {
   const { k, row } = findKey(state, body.key);
   if (!validateFormat(k) || !row) return { status: 404, body: { ok: false, error: 'key_not_found' } };
   if (row.status !== 'active') return { status: 403, body: { ok: false, error: 'key_revoked' } };
+  if (isExpired(row)) return { status: 403, body: { ok: false, error: 'key_expired' } };
   if (!row.devices.some(d => d.id === body.deviceId)) {
     return { status: 403, body: { ok: false, error: 'device_not_activated' } };
   }
@@ -138,6 +148,49 @@ function remove(state, body) {
   return { status: 200, body: { ok: true, removed: before - state.keys.length } };
 }
 
+function trialRequest(state, body) {
+  state.requests = state.requests || [];
+  const name = String(body.name || '').trim();
+  const phone = String(body.phone || '').trim().replace(/\s+/g, '');
+  const email = String(body.email || '').trim();
+  const store = String(body.store || '').trim();
+
+  if (name.length < 2) return { status: 400, body: { ok: false, error: 'name_required' } };
+  if (!/^[\d+\-()]{8,20}$/.test(phone) && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+    return { status: 400, body: { ok: false, error: 'contact_required' } };
+  }
+  if (state.requests.some(r => (phone && r.phone === phone) && r.status === 'pending')) {
+    return { status: 409, body: { ok: false, error: 'already_pending' } };
+  }
+
+  const req = {
+    id: `req_${crypto.randomBytes(5).toString('hex')}`,
+    name, phone, email, store,
+    status: 'pending',
+    createdAt: new Date().toISOString(),
+    key: null
+  };
+  state.requests.push(req);
+  return { status: 201, body: { ok: true, request: { id: req.id, name: req.name } } };
+}
+
+function issueTrial(state, body) {
+  state.requests = state.requests || [];
+  const req = state.requests.find(r => r.id === body.requestId);
+  if (!req) return { status: 404, body: { ok: false, error: 'request_not_found' } };
+  if (req.status === 'fulfilled') return { status: 409, body: { ok: false, error: 'already_fulfilled', key: req.key } };
+
+  const made = issue(state, 1, 'trial', `trial:${req.id} ${req.name}`)[0];
+  req.status = 'fulfilled';
+  req.key = made.key;
+  req.fulfilledAt = new Date().toISOString();
+  return { status: 201, body: { ok: true, key: made.key, expiresAt: made.expiresAt, request: req } };
+}
+
+function listRequests(state) {
+  return { requests: state.requests || [] };
+}
+
 function list(state) {
   return {
     keys: state.keys.map(k => ({ ...k, deviceCount: k.devices.length })),
@@ -169,5 +222,6 @@ function payment(state, body) {
 
 module.exports = {
   PLANS, generateKey, validateFormat, normalize,
-  issue, activate, verify, deactivate, revoke, reactivate, remove, list, payment
+  issue, activate, verify, deactivate, revoke, reactivate, remove, list, payment,
+  trialRequest, issueTrial, listRequests, isExpired, WEEK_MS
 };

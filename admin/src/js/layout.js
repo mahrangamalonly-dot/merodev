@@ -4,6 +4,7 @@ import LoginView from './views/login.js';
 
 const routes = [
   { path: 'dashboard', label: 'نظرة عامة', icon: ICONS.dash },
+  { path: 'requests', label: 'طلبات التجربة', icon: ICONS.inbox },
   { path: 'keys', label: 'المفاتيح', icon: ICONS.key },
   { path: 'orders', label: 'الطلبات', icon: ICONS.cart },
   { path: 'settings', label: 'الإعدادات', icon: ICONS.gear }
@@ -11,6 +12,7 @@ const routes = [
 
 const modules = {
   dashboard: () => import('./views/dashboard.js'),
+  requests: () => import('./views/requests.js'),
   keys: () => import('./views/keys.js'),
   orders: () => import('./views/orders.js'),
   settings: () => import('./views/settings.js')

@@ -238,6 +238,65 @@
   };
   fillPayments();
 
+  const trialForm = $('#trialForm');
+  if (trialForm) {
+    const note = $('#trialNote');
+    const btn = $('#trialBtn');
+
+    const phoneOk = v => /^[\d+\-()\s]{8,20}$/.test(v.trim());
+    const mailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
+
+    trialForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      const name = $('#tName').value.trim();
+      const phone = $('#tPhone').value.trim();
+      const mail = $('#tMail').value.trim();
+      const store = $('#tStore').value.trim();
+
+      if (name.length < 2) { note.textContent = 'اكتب اسمك.'; note.className = 'form-note err'; return; }
+      if (!phoneOk(phone) && !mailOk(mail)) {
+        note.textContent = 'ادخل رقم واتساب صحيح أو بريد إلكتروني.';
+        note.className = 'form-note err';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'جارٍ الإرسال...';
+      note.textContent = '';
+      note.className = 'form-note';
+
+      try {
+        const res = await fetch(`${CFG.siteUrl.replace(/\/+$/, '')}/api/trial-request`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, phone, email: mail, store, source: 'website' })
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (res.status === 409) {
+          note.textContent = 'عندك طلب تجربة قيد التنفيذ بالفعل — هنراسلك قريب.';
+          note.className = 'form-note err';
+        } else if (data.ok) {
+          note.textContent = `تمام ${name}! استلمنا طلبك — هنبعتهالك المفتاح على الواتساب خلال ساعات.`;
+          note.className = 'form-note';
+          trialForm.reset();
+        } else {
+          throw new Error(data.error || 'failed');
+        }
+      } catch {
+        note.textContent = 'تعذّر الإرسال. راسلنا على الواتساب مباشرة.';
+        note.className = 'form-note err';
+        if (CFG.whatsapp) {
+          const phone2 = String(CFG.whatsapp).replace(/\D/g, '');
+          note.innerHTML += ` <a href="https://wa.me/${phone2}" target="_blank" rel="noopener" style="color:var(--neon-2)">اضغط هنا</a>`;
+        }
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'اطلب نسخة تجريبية';
+    });
+  }
+
   const bar = $('#consoleBar');
   if (bar) {
     const widths = [35, 62, 88, 48, 74];
