@@ -6,11 +6,11 @@ window.MERO_CONFIG = {
 
   formEndpoint: '',
 
-  releases: 'https://github.com/mero-dev/mero-pos/releases',
+  releases: 'https://github.com/mahrangamalonly-dot/merodev/releases',
 
   downloads: {
-    win: 'https://github.com/mero-dev/mero-pos/releases/latest/download/Mero.Dev.POS.Setup.exe',
-    linux: 'https://github.com/mero-dev/mero-pos/releases/latest/download/Mero.Dev.POS.AppImage',
+    win: 'https://github.com/mahrangamalonly-dot/merodev/releases/latest/download/Mero.Dev.POS.Setup.exe',
+    linux: 'https://github.com/mahrangamalonly-dot/merodev/releases/latest/download/Mero.Dev.POS.AppImage',
     web: '/pos/'
   },
 

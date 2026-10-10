@@ -27,8 +27,8 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "mero-dev",
-        "repo": "mero-pos"
+        "owner": "mahrangamalonly-dot",
+        "repo": "merodev"
       }
     ],
     "win": {
