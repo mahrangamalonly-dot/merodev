@@ -140,8 +140,11 @@ function mount(root) {
       } else {
         setStatus(`فشل التحقق: ${body.error || res.status}`, false);
       }
-    } catch {
-      setStatus('تعذّر الوصول إلى السيرفر. تحقق من العنوان والإنترنت.', false);
+    } catch (err) {
+      const offline = navigator.onLine === false;
+      setStatus(offline
+        ? 'الجهاز غير متصل بالإنترنت حالياً.'
+        : 'تعذّر الوصول إلى ' + url + ' (' + String(err && err.message || err).slice(0, 80) + ') تحقق من الإنترنت أو جرب شبكة أخرى.', false);
     }
   });
 

@@ -16,15 +16,34 @@ const ERRORS = {
 async function callServer(server, path, body) {
   const base = String(server || '').replace(/\/+$/, '');
   if (!base) return { error: 'no_server' };
-  const res = await fetch(`${base}${path}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
-  }).catch(() => null);
-  if (!res) return { error: 'network' };
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok || data.ok !== true) return { error: data.error || 'key_not_found', data };
-  return { ok: true, data };
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 15000);
+
+  try {
+    const res = await fetch(`${base}${path}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      signal: controller.signal
+    });
+    clearTimeout(timer);
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || data.ok !== true) return { error: data.error || 'key_not_found', data };
+    return { ok: true, data };
+  } catch (err) {
+    clearTimeout(timer);
+    const aborted = err && err.name === 'AbortError';
+    const reason = aborted ? 'timeout' : (navigator.onLine === false ? 'offline' : 'fetch_failed');
+    return { error: 'network', reason, detail: String(err && err.message || err).slice(0, 120) };
+  }
+}
+
+function networkMessage(result) {
+  const base = String(db.get().settings.licenseServer || '').replace(/\/+$/, '');
+  if (result.reason === 'offline') return 'الجهاز غير متصل بالإنترنت. شغّل الإنترنت وأعد المحاولة.';
+  if (result.reason === 'timeout') return `انتهت مهلة الاتصال بـ ${base} — الشبكة بطيئة أو السيرفر لا يستجيب.`;
+  return `تعذّر الوصول إلى ${base} (${result.detail || 'fetch failed'}). تحقق من الإنترنت أو جرب شبكة أخرى.`;
 }
 
 export { callServer };
@@ -129,7 +148,9 @@ function mount(root) {
     });
 
     if (!result.ok) {
-      err.textContent = ERRORS[result.error] || 'فشل تفعيل المفتاح.';
+      err.textContent = ERRORS[result.error] === ERRORS.network
+        ? networkMessage(result)
+        : (ERRORS[result.error] || 'فشل تفعيل المفتاح.');
       btn.disabled = false;
       btn.textContent = 'تفعيل النسخة';
       return;
