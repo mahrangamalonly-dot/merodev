@@ -1,0 +1,38 @@
+{
+  "name": "mero-pos-pro",
+  "productName": "Mero POS Pro",
+  "version": "2.0.0",
+  "description": "نظام إدارة مكتب التوصيل — فواتير، عملاء آجل وشهريون، مناديب، مصروفات وتقارير",
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "electron/main.cjs",
+  "scripts": {
+    "start": "node server.cjs",
+    "dev": "node server.cjs",
+    "electron": "electron .",
+    "dist": "electron-builder --win nsis --publish never"
+  },
+  "build": {
+    "appId": "com.merodev.pospro",
+    "productName": "Mero POS Pro",
+    "artifactName": "Mero.POS.Pro.${ext}",
+    "files": [
+      "index.html",
+      "assets/**/*",
+      "src/**/*",
+      "server.cjs",
+      "electron/**/*"
+    ],
+    "win": {
+      "target": ["nsis"],
+      "publisherName": "Mero Dev",
+      "signAndEditExecutable": false,
+      "icon": "assets/img/icon.ico"
+    },
+    "linux": { "target": "AppImage", "icon": false }
+  },
+  "devDependencies": {
+    "electron": "^32.0.0",
+    "electron-builder": "^25.1.8"
+  }
+}
