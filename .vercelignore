@@ -8,6 +8,9 @@ license-server/data
 pos/dist
 pos/out
 admin/dist
+pos-pro
+old/*.exe
+old/*.blockmap
 *.log
 .DS_Store
 .env
